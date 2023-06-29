@@ -71,9 +71,11 @@ class _LoginState extends State<Login> {
                     borderSide: BorderSide.none,
                   ),
                   contentPadding: EdgeInsets.all(20.0),
+
                 ),
               ),
               SizedBox(height: 10.0),
+
               TextField(
                 controller: passwordController,
                 decoration: InputDecoration(
