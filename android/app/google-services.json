@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1049101405665",
+    "project_id": "chakula-584ea",
+    "storage_bucket": "chakula-584ea.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1049101405665:android:51cd7b53d7ea67e91996a0",
+        "android_client_info": {
+          "package_name": "com.kipronodeveloper.kibumess"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1049101405665-379qljunc7oab91thqr0sbbgnhsqeg2s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDXnb-n410ncAjdsAUUUJAcm43CFUkVUkM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1049101405665-379qljunc7oab91thqr0sbbgnhsqeg2s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
