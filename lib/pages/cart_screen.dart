@@ -2,6 +2,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:kibumess/mpesa/MpesaStkPushService.dart';
 import '../model/cart_item.dart';
 
 class CartScreen extends StatefulWidget {
@@ -124,6 +125,9 @@ class _CartScreenState extends State<CartScreen> {
             ElevatedButton(
               onPressed: () {
                 // Perform checkout or payment logic here
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>MpesaStkPush(
+                  totalAmount: totalItemAmount,
+                )));
               },
               child: const Text("Checkout"),
             ),
@@ -159,16 +163,16 @@ class CartItemWidget extends StatelessWidget {
         children: [
           IconButton(
             onPressed: onDecrement,
-            icon: const Icon(Icons.remove),
+            icon: const Icon(Icons.remove_circle,color: Colors.blue,),
           ),
           Text(cartItem.quantity.toString()),
           IconButton(
             onPressed: onIncrement,
-            icon: const Icon(Icons.add),
+            icon: const Icon(Icons.add_circle,color: Colors.blue,),
           ),
           IconButton(
             onPressed: onRemove,
-            icon: const Icon(Icons.delete),
+            icon: const Icon(Icons.delete,color: Colors.red,),
           ),
         ],
       ),
