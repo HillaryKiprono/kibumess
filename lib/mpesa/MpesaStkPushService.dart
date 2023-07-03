@@ -43,20 +43,20 @@ class MpesaStkPushState extends State<MpesaStkPush> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text("Enter Phone Number and Amount"),
+          title: const Text("Enter Phone Number and Amount"),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               TextField(
                 controller: _phoneNumberController,
                 keyboardType: TextInputType.phone,
-                decoration: InputDecoration(labelText: 'Phone Number'),
+                decoration: const InputDecoration(labelText: 'Phone Number'),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               TextField(
                 controller: _amountController,
                 keyboardType: TextInputType.number,
-                decoration: InputDecoration(labelText: 'Amount'),
+                decoration: const InputDecoration(labelText: 'Amount'),
               ),
             ],
           ),
@@ -66,7 +66,7 @@ class MpesaStkPushState extends State<MpesaStkPush> {
                 lipaNaMpesa();
                 Navigator.pop(context); // Close the dialog
               },
-              child: Text("Submit"),
+              child: const Text("Submit"),
             ),
           ],
         );
@@ -79,7 +79,7 @@ class MpesaStkPushState extends State<MpesaStkPush> {
       theme: ThemeData(primaryColor: Color(0xFF481E4D)),
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Mpesa Payment Demo'),
+          title: const Text('Mpesa Payment Demo'),
           centerTitle: true,
         ),
         body: Padding(
@@ -89,7 +89,7 @@ class MpesaStkPushState extends State<MpesaStkPush> {
               TextField(
                 controller: _phoneNumberController,
                 keyboardType: TextInputType.phone,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Phone Number',
                 ),
               ),
@@ -97,7 +97,7 @@ class MpesaStkPushState extends State<MpesaStkPush> {
               TextField(
                 controller: _amountController,
                 keyboardType: TextInputType.number,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Amount',
                 ),
               ),
@@ -106,7 +106,7 @@ class MpesaStkPushState extends State<MpesaStkPush> {
                 onPressed: () {
                   lipaNaMpesa();
                 },
-                child: Text(
+                child: const Text(
                   "Lipa na Mpesa",
                   style: TextStyle(color: Colors.white),
                 ),
