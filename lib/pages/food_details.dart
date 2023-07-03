@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:kibumess/pages/cart_screen.dart';
 import 'package:quantity_input/quantity_input.dart';
@@ -6,12 +8,12 @@ import 'package:badges/badges.dart' as badges;
 import '../model/cartModel.dart';
 
 class FoodDetails extends StatefulWidget {
-  List<String> cartItems = []; //a list to store the items in the cart
-
   final foodImage_details;
   final foodName_details;
   final foodPrice_details;
   final foodqty;
+  final String username; // Add the username parameter
+
 
   FoodDetails({
     super.key,
@@ -19,6 +21,7 @@ class FoodDetails extends StatefulWidget {
     required this.foodName_details,
     required this.foodPrice_details,
     this.foodqty,
+    required  this.username,
   });
 
   @override
@@ -26,19 +29,11 @@ class FoodDetails extends StatefulWidget {
 }
 
 class _FoodDetailsState extends State<FoodDetails> {
-  List<CartItem> cartItems = []; // List to store the items in the cart
-
-  void addToCart(CartItem cartItem) {
-    setState(() {
-      cartItems.add(cartItem); // Add the item to the cartItems list
-    });
-  }
-
+  List<CartItemData> cartItems = [];
   int simpleIntInput = 0;
   int _cartBadgeAmount = 0;
   late bool _showCartBadge;
   Color color = Colors.red;
-  bool _isAddedToCart = false; // Track if the item is added to cart
 
   Widget _shoppingCartBadge() {
     return badges.Badge(
@@ -54,6 +49,14 @@ class _FoodDetailsState extends State<FoodDetails> {
       ),
       child: IconButton(icon: Icon(Icons.shopping_cart), onPressed: () {}),
     );
+  }
+
+  void addToCart(CartItemData cartItem) {
+    setState(() {
+      cartItems.add(cartItem);
+      _cartBadgeAmount++;
+      _showCartBadge = true;
+    });
   }
 
   @override
@@ -94,124 +97,56 @@ class _FoodDetailsState extends State<FoodDetails> {
                   const Icon(
                     Icons.favorite_border,
                     color: Colors.red,
-                  )
+                  ),
                 ],
               ),
             ),
             QuantityInput(
-                value: simpleIntInput,
-                onChanged: (value) {
-                  setState(() {
-                    simpleIntInput = int.parse(value.replaceAll(',', ''));
-                  });
-                }),
-            // ElevatedButton.icon(
-            //   onPressed: () {
-            //     if (!_isAddedToCart) {
-            //       setState(() {
-            //         _cartBadgeAmount++; // Increment the badge number
-            //         _isAddedToCart = true; // Set item added to cart flag
-            //       });
-            //     }
-            //   },
-            //   icon: const Icon(Icons.shopping_cart),
-            //   label: Text(_isAddedToCart ? 'Item Added' : 'Add To Cart'),
-            // ),
-
+              value: simpleIntInput,
+              onChanged: (value) {
+                setState(() {
+                  simpleIntInput = int.parse(value.replaceAll(',', ''));
+                });
+              },
+            ),
             ElevatedButton.icon(
               onPressed: () {
-                if (_cartBadgeAmount >= 0 && _cartBadgeAmount < 1) {
-                  setState(() {
-                    _cartBadgeAmount++;
-                  });
+                // Create a CartItemData object
+                CartItemData cartItem = CartItemData(
+                  image: widget.foodImage_details,
+                  name: widget.foodName_details,
+                  price: double.parse(widget.foodPrice_details),
+                  quantity: simpleIntInput,
+                  username: widget.username,
+                );
 
-                  // Create a CartItem object
-                  CartItem cartItem = CartItem(
-                    image: widget.foodImage_details,
-                    name: widget.foodName_details,
-                    price: double.parse(widget.foodPrice_details),
-                    quantity: simpleIntInput,
-                  );
+                // Add the cartItem to the Firebase Realtime Database
+                DatabaseReference cartRef = FirebaseDatabase.instance
+                    .reference()
+                    .child('cart');
 
-                  // Pass the CartItem object to the addToCart callback function
-                  addToCart(cartItem);
+                cartRef.push().set(cartItem.toJson());
 
-                  // Navigate to the CartScreen
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => CartScreen(cartItems: cartItems),
-                    ),
-                  );
-                }
+                // Pass the CartItemData object to the addToCart callback function
+                addToCart(cartItem);
+
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (context) => CartScreen(cartItems: cartItems),
+                //   ),
+                // );
               },
-              icon: const Icon(Icons.shopping_cart),
-              label: const Text("Add To Cart"),
-            )
+              icon: const Icon(Icons.add_shopping_cart),
+              label: const Text('Add to Cart'),
+            ),
+
           ],
+          
         ),
+        
       ),
+
     );
   }
-}
-
-Widget _shoppingCartBadge() {
-  var _showCartBadge;
-  var _cartBadgeAmount;
-  Color color = Colors.red;
-  return badges.Badge(
-    position: badges.BadgePosition.topEnd(top: 0, end: 3),
-    badgeAnimation: const badges.BadgeAnimation.slide(
-        // disappearanceFadeAnimationDuration: Duration(milliseconds: 200),
-        // curve: Curves.easeInCubic,
-        ),
-    showBadge: _showCartBadge,
-    badgeStyle: badges.BadgeStyle(
-      badgeColor: color,
-    ),
-    badgeContent: Text(
-      _cartBadgeAmount.toString(),
-      style: TextStyle(color: Colors.white),
-    ),
-    child: IconButton(icon: Icon(Icons.shopping_cart), onPressed: () {}),
-  );
-}
-
-PreferredSizeWidget _tabBar() {
-  return TabBar(tabs: [
-    Tab(
-      icon: badges.Badge(
-        badgeStyle: const badges.BadgeStyle(
-          badgeColor: Colors.blue,
-        ),
-        position: badges.BadgePosition.topEnd(top: -14),
-        badgeContent: const Text(
-          '3',
-          style: TextStyle(color: Colors.white),
-        ),
-        child: Icon(
-          Icons.account_balance_wallet,
-          color: Colors.grey[800],
-        ),
-      ),
-    ),
-    Tab(
-      child: badges.Badge(
-        badgeStyle: badges.BadgeStyle(
-          shape: badges.BadgeShape.square,
-          borderRadius: BorderRadius.circular(5),
-          padding: EdgeInsets.all(2),
-          badgeGradient: const badges.BadgeGradient.linear(
-            colors: [
-              Colors.purple,
-              Colors.blue,
-            ],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ),
-        ),
-        position: badges.BadgePosition.topEnd(top: -12, end: -20),
-      ),
-    ),
-  ]);
 }

@@ -1,36 +1,30 @@
-import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:kibumess/admin/addFood.dart';
+import 'package:kibumess/GrocerryApp/dashboard.dart';
+import 'package:kibumess/GrocerryApp/splashscreen.dart';
 import 'package:kibumess/authentication%20/login.dart';
-import 'package:kibumess/authentication%20/register.dart';
-import 'package:kibumess/displayFood.dart';
-import 'package:kibumess/pages/cart_screen.dart';
-import 'package:kibumess/pages/fetchFood.dart';
+import 'package:kibumess/mpesa/MpesaStkPushService.dart';
+import 'package:shimmer/main.dart';
 
-import 'model/cartModel.dart';
-
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  runApp( MyApp());
+void main(){
+runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-   MyApp({super.key});
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return  MaterialApp(
+      title:" Kibu Mess",
       debugShowCheckedModeBanner: false,
-      title: 'Kibu Mess Meal',
-      theme: ThemeData(
+      // routes: {
+      //   "/": (context)=>const SplashScreen(),
+      //   "Dashboard": (context)=>Dashboard()
+      // },
 
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-        home:  RegisterActivity(),
-      //home: CartScreen(),
+      home: STKPushScreen(),
     );
+
   }
 }
-
-

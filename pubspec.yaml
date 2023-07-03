@@ -46,6 +46,10 @@ dependencies:
   fluttertoast: ^8.2.2
   font_awesome_flutter: ^10.5.0
   provider: ^6.0.5
+  shared_preferences: ^2.1.2
+  shimmer: ^3.0.0
+  mpesa_flutter_plugin: ^1.6.1
+  http: ^1.1.0
 
 dev_dependencies:
   flutter_test:
@@ -81,6 +85,15 @@ flutter:
     - assets/images/res2.jpg
     - assets/images/register.png
     - assets/images/orderimag.png
+    - assets/images/splash.png
+    - assets/images/bg1.jpg
+    - assets/images/1.png
+    - assets/images/2.png
+    - assets/images/3.png
+    - assets/images/4.png
+    - assets/images/5.png
+    - assets/images/6.png
+    - assets/images/7.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
