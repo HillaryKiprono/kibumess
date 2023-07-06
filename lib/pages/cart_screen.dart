@@ -7,9 +7,7 @@ import '../model/cart_item.dart';
 
 class CartScreen extends StatefulWidget {
   CartScreen({Key? key, required this.username}) : super(key: key);
-
   final String username;
-
 
   @override
   _CartScreenState createState() => _CartScreenState();

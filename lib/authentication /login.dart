@@ -49,21 +49,12 @@ class _LoginActivityState extends State<LoginActivity> {
           // Store user credentials in SharedPreferences
           SharedPreferences prefs = await SharedPreferences.getInstance();
           await prefs.setString('userId', userId);
-
-          // // Navigate to UserDashboard
-          // Navigator.push(
-          //   context,
-          //   MaterialPageRoute(
-          //     builder: (context) => UserDashboard(),
-          //   ),
-          // );
-
           // Navigate to appropriate dashboard based on role
           if (role == 'Admin') {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => AdminDashboard(),
+                builder: (context) => AdminDashboard(username: username,),
               ),
             );
             Fluttertoast.showToast(msg: "Congratulation you have succsfully Login");
@@ -71,7 +62,7 @@ class _LoginActivityState extends State<LoginActivity> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => UserDashboard(),
+                builder: (context) => UserDashboard(username: username,),
               ),
             );
             Fluttertoast.showToast(msg: "Congratulation you have succsfully Login");
