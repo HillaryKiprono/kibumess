@@ -1,9 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:kibumess/GrocerryApp/dashboard.dart';
-import 'package:kibumess/GrocerryApp/splashscreen.dart';
+
 import 'package:kibumess/authentication%20/login.dart';
+import 'package:kibumess/authentication%20/register.dart';
 import 'package:kibumess/mpesa/MpesaStkPushService.dart';
 import 'package:kibumess/pages/cart_screen.dart';
 import 'package:shimmer/main.dart';
@@ -25,12 +25,7 @@ class MyApp extends StatelessWidget {
     return  MaterialApp(
       title:" Kibu Mess",
       debugShowCheckedModeBanner: false,
-      // routes: {
-      //   "/": (context)=>const SplashScreen(),
-      //   "Dashboard": (context)=>Dashboard()
-      // },
-
-      home: LoginPage(),
+      home: LoginActivity(),
     );
 
   }

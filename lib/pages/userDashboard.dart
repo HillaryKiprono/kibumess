@@ -3,15 +3,16 @@ import 'dart:async';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:kibumess/pages/cart_screen.dart';
+import 'package:kibumess/pages/fetch_orders.dart';
 import 'package:shimmer/shimmer.dart';
 
 import '../model/food_item.dart';
 import 'food_details.dart';
 
 class UserDashboard extends StatefulWidget {
-  final String username;
+ // final String username;
 
-  const UserDashboard({Key? key, required this.username}) : super(key: key);
+  const UserDashboard({Key? key,}) : super(key: key);
 
   @override
   State<UserDashboard> createState() => _UserDashboardState();
@@ -54,7 +55,7 @@ class _UserDashboardState extends State<UserDashboard> {
               )),
           IconButton(
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>CartScreen(username: widget.username,)));
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>CartScreen(username:"",)));
               },
               icon: const Icon(
                 Icons.shopping_cart,
@@ -70,7 +71,7 @@ class _UserDashboardState extends State<UserDashboard> {
               decoration: const BoxDecoration(
                   color: Colors.red
               ),
-              accountName: Text("Hello ${widget.username} Welcome"),
+              accountName: Text("Hello ${widget} Welcome"),
               accountEmail: Text(""),
               currentAccountPicture: const CircleAvatar(
 
@@ -86,7 +87,7 @@ class _UserDashboardState extends State<UserDashboard> {
             ),
 
             InkWell(
-              onTap: (){},
+              onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>const FetchActivities()));},
               child: const ListTile(
                 leading: Icon(Icons.shopping_basket,color: Colors.red,),
                 title: Text("My Orders"),
@@ -160,7 +161,8 @@ class _UserDashboardState extends State<UserDashboard> {
                       tag: const Text("hero"),
                       child: InkWell(
                         onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context)=>FoodDetails(
-                          username: widget.username,
+                          //username: widget.username,
+                          username: "",
                           foodImage_details: foodItem.imageUrl,
                           foodName_details: foodItem.name,
                           foodPrice_details: foodItem.price,

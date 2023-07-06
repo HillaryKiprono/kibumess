@@ -10,6 +10,7 @@ class CartScreen extends StatefulWidget {
 
   final String username;
 
+
   @override
   _CartScreenState createState() => _CartScreenState();
 }
@@ -127,6 +128,8 @@ class _CartScreenState extends State<CartScreen> {
                 // Perform checkout or payment logic here
                 Navigator.push(context, MaterialPageRoute(builder: (context)=>MpesaStkPush(
                   totalAmount: totalItemAmount,
+                    cartItems: cartItems,
+                  username: widget.username,
                 )));
               },
               child: const Text("Checkout"),

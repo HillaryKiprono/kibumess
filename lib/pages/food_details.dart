@@ -12,7 +12,7 @@ class FoodDetails extends StatefulWidget {
   final foodName_details;
   final foodPrice_details;
   final foodqty;
-  final String username; // Add the username parameter
+ // final String username; // Add the username parameter
 
 
   FoodDetails({
@@ -20,8 +20,8 @@ class FoodDetails extends StatefulWidget {
     required this.foodImage_details,
     required this.foodName_details,
     required this.foodPrice_details,
-    this.foodqty,
-    required  this.username,
+    this.foodqty, required String username,
+ //   required  this.username,
   });
 
   @override
@@ -117,7 +117,8 @@ class _FoodDetailsState extends State<FoodDetails> {
                   name: widget.foodName_details,
                   price: double.parse(widget.foodPrice_details),
                   quantity: simpleIntInput,
-                  username: widget.username,
+                 username: ''
+                 // username: widget.username,
                 );
 
                 // Add the cartItem to the Firebase Realtime Database
