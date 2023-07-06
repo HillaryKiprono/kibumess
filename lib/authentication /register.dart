@@ -356,6 +356,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:kibumess/authentication%20/login.dart';
 
 class RegisterActivity extends StatelessWidget {
   final DatabaseReference _userRef =
@@ -438,46 +439,176 @@ class RegisterActivity extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Create Account'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TextField(
-              controller: _usernameController,
-              decoration: const InputDecoration(
-                labelText: 'username',
+      body:
+      // Padding(
+      //   padding: const EdgeInsets.all(20.0),
+      //   child: Column(
+      //     crossAxisAlignment: CrossAxisAlignment.start,
+      //     children: [
+      //       TextField(
+      //         controller: _usernameController,
+      //         decoration: const InputDecoration(
+      //           labelText: 'username',
+      //         ),
+      //       ),
+      //       TextField(
+      //         controller: _emailController,
+      //         decoration: const InputDecoration(
+      //           labelText: 'Email',
+      //         ),
+      //       ),
+      //       TextField(
+      //         controller: _phoneController,
+      //         decoration: InputDecoration(
+      //           labelText: 'Phone Number',
+      //         ),
+      //       ),
+      //       TextField(
+      //         controller: _passwordController,
+      //         obscureText: true,
+      //         decoration: const InputDecoration(
+      //           labelText: 'Password',
+      //         ),
+      //       ),
+      //       SizedBox(height: 20.0),
+      //       ElevatedButton(
+      //         onPressed: () {
+      //           _createAccount(context);
+      //         },
+      //         child: Text('Create Account'),
+      //       ),
+      //     ],
+      //   ),
+      // ),
+      Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/res2.jpg'),
+            fit: BoxFit.cover,
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(height: 10.0),
+              TextField(
+                controller: _usernameController,
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white,
+                  hintText: 'Username',
+                  hintStyle: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                    borderSide: BorderSide.none,
+                  ),
+                  contentPadding: EdgeInsets.all(20.0),
+                ),
               ),
-            ),
-            TextField(
-              controller: _emailController,
-              decoration: const InputDecoration(
-                labelText: 'Email',
+              SizedBox(height: 10.0),
+              TextField(
+                controller: _emailController,
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white,
+                  hintText: 'Email',
+                  hintStyle: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                    borderSide: BorderSide.none,
+                  ),
+                  contentPadding: EdgeInsets.all(20.0),
+                ),
               ),
-            ),
-            TextField(
-              controller: _phoneController,
-              decoration: InputDecoration(
-                labelText: 'Phone Number',
+
+              SizedBox(height: 10.0),
+              TextField(
+                controller: _phoneController,
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white,
+                  hintText: 'Phone Number',
+                  hintStyle: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                    borderSide: BorderSide.none,
+                  ),
+                  contentPadding: EdgeInsets.all(20.0),
+                ),
               ),
-            ),
-            TextField(
-              controller: _passwordController,
-              obscureText: true,
-              decoration: const InputDecoration(
-                labelText: 'Password',
+              SizedBox(height: 10.0),
+              TextField(
+                controller: _passwordController,
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white,
+                  hintText: "Password",
+                  hintStyle: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                    borderSide: BorderSide.none,
+                  ),
+                  contentPadding: EdgeInsets.all(20.0),
+                ),
+                obscureText: true,
               ),
-            ),
-            SizedBox(height: 20.0),
-            ElevatedButton(
-              onPressed: () {
-                _createAccount(context);
-              },
-              child: Text('Create Account'),
-            ),
-          ],
+              SizedBox(height: 10.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        _createAccount(context);
+                      },
+                      child: Text('Register'),
+                    ),
+                  ),
+                ],
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    const Text(
+                      'Alredy have an account?',
+                      style: TextStyle(color: Colors.blue),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LoginActivity()));
+                      },
+                      child: Text(
+                        'Click here',
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
+
     );
   }
 }

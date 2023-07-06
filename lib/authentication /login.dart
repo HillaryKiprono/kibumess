@@ -118,7 +118,8 @@ class _LoginActivityState extends State<LoginActivity> {
       appBar: AppBar(
         title: Text('Login'),
       ),
-      body: Container(
+      body:
+      Container(
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/images/res1.jpg'),
@@ -208,12 +209,8 @@ class _LoginActivityState extends State<LoginActivity> {
                     ),
                     TextButton(
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => RegisterActivity(),
-                          ),
-                        );
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>RegisterActivity()));
+
                       },
                       child: Text(
                         'Click here',

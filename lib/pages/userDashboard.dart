@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:kibumess/authentication%20/login.dart';
 import 'package:kibumess/pages/cart_screen.dart';
 import 'package:kibumess/pages/fetch_orders.dart';
 import 'package:shimmer/shimmer.dart';
@@ -120,7 +121,9 @@ class _UserDashboardState extends State<UserDashboard> {
                 ),
               ),
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>LoginActivity()));
+                },
                 child: const ListTile(
                   leading: Icon(
                     Icons.logout,
